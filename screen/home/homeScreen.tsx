@@ -1,4 +1,4 @@
-import { SafeAreaView,StyleSheet,Text,View,Image } from "react-native"
+import { SafeAreaView,StyleSheet,Text,View,Image, ScrollView, FlatList } from "react-native"
 import { HomeScreenType } from "./interface"
 import Header from "../../src/components/header/index"
 import Input from "../../src/components/input/input"
@@ -6,6 +6,8 @@ import { useState } from "react"
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Dropdown from "../../src/components/dropdown/dropDown"
 import TabMenu from "../../src/components/tabMenu/tabMenu"
+import {data} from "./fakeData"
+import Products from "../../src/components/products/products"
 const HomeScreen: React.FC<HomeScreenType> = ({
     
 }) => {
@@ -48,6 +50,16 @@ const HomeScreen: React.FC<HomeScreenType> = ({
                     <Dropdown type="icon" classDropdown={styles.dropdown} />
                 </View>
                 <TabMenu data={fakeData} styleTabmenu={styles.tabmenu} onpress={handleChangeTab} contentTabmenu={styles.contentTabMenu} styleAcitive={styles.tabActive} value={valueTabMenu} />
+                <SafeAreaView>
+                    <FlatList
+                    data={data}
+                    horizontal={true}
+                    renderItem={({item})=>{
+                        return <Products items={item}/>
+                    }}
+                    >
+                    </FlatList>
+                </SafeAreaView>
             </View>
         </SafeAreaView>
     )

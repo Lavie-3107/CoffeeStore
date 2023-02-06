@@ -1,13 +1,35 @@
-const data = [
+export const data = [
     {
         url: "https://caphenguyenchat.vn/wp-content/uploads/2017/11/tim-hieu-ve-ca-phe-y-ca-phe-cappuccino-do-uong-thinh-hanh-3.png",
-        name: "Espresso with Oa t Milk",
+        name: "Espresso",
+        subname:"with Oa t Milk",
         vote: 4.5,
         price: 10,
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel tincidunt et ullamcorper eu, vivamus semper commodo",
         category: "Espresso",
         popular: true,
         new: false,
-
+    },
+    {
+        url: "https://cdn.tgdd.vn/2021/09/CookProduct/Cafe-latte-la-gi-latte-va-cupuchino-co-gi-khac-cac-loai-cach-pha-latte-0-1200x676.jpg",
+        name: "Espresso",
+        subname:"with Oa t Milk",
+        vote: 4.5,
+        price: 10,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel tincidunt et ullamcorper eu, vivamus semper commodo",
+        category: "Espresso",
+        popular: true,
+        new: false,
+    },
+    {
+        url: "https://cdn.tgdd.vn/2021/09/CookProduct/Cafe-latte-la-gi-latte-va-cupuchino-co-gi-khac-cac-loai-cach-pha-latte-0-1200x676.jpg",
+        name: "Espresso",
+        subname:"with Oa t Milk",
+        vote: 4.5,
+        price: 10,
+        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel tincidunt et ullamcorper eu, vivamus semper commodo",
+        category: "Espresso",
+        popular: true,
+        new: false,
     }
 ]

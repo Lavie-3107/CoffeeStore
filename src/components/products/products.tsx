@@ -4,24 +4,25 @@ import { TypeProducts } from "./interface"
 import Iconn from 'react-native-vector-icons/AntDesign'
 import {styles} from "./styles"
 const Products: React.FC<TypeProducts> = ({
-    
+    items,
+    onpress
 }) => {
     return (
        <SafeAreaView style={ styles.wrapProducts}>
-                    <Image source={{ uri: 'https://caphenguyenchat.vn/wp-content/uploads/2017/11/tim-hieu-ve-ca-phe-y-ca-phe-cappuccino-do-uong-thinh-hanh-3.png' }}
+                    <Image source={{ uri: `${items.url}` }}
                         style={styles.imgProducts} />
                      <View style={ styles.wrapVote}>
                         <View style={styles.bgdVoteBlur}></View>
                         <View style={styles.wrapContentVote}>
                              <Iconn name="star" color="#D17842" size={16} />
-                            <Text style={ styles.numberStar}>4.5</Text>
+                            <Text style={ styles.numberStar}>{items.vote}</Text>
                         </View>
                               </View>
                     <View style={styles.wrapContentProducts}>
                         <View style={styles.wrapName}>
                             <View style={styles.wrapNameProducts}>
-                                <Text style={styles.nameProducts}>Espresso</Text>
-                                 <Text style={styles.descriptionProducts}>with Oa t Milk</Text>
+                                <Text style={styles.nameProducts}>{items.name}</Text>
+                                 <Text style={styles.descriptionProducts}>{items.subname}</Text>
                             </View>
                         </View>
                         <View style={styles.priceandButton}>
