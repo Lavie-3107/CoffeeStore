@@ -5,37 +5,15 @@ import Input from "../../src/components/input/input"
 import { useState } from "react"
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Dropdown from "../../src/components/dropdown/dropDown"
-import TabMenu from "../../src/components/tabMenu/tabMenu"
-import {data} from "./fakeData"
-import Products from "../../src/components/products/products"
+import BlockListProdHome from "../../src/components/blockListProdHomescreen"
+import BlockPopularHome from "../../src/components/blockPopularHomesreen"
 const HomeScreen: React.FC<HomeScreenType> = ({
     
 }) => {
     const [valueInput, setValueInput] = useState<string>("")
-    const [valueTabMenu,setValueTabMenu]=useState<number>(1)
-    const fakeData = [
-        {
-            name: "Espresso",
-            value: 1,
-        },
-         {
-            name: "Latte",
-            value: 2,
-        },
-          {
-            name: "Cappuccino",
-            value: 3,
-        },
-           {
-            name: "Cafetière",
-            value: 4,
-        }
-    ]
-    const handleChangeTab = (value:number) => {
-        setValueTabMenu(value)
-    }
     return (
-        <SafeAreaView>
+        <ScrollView>
+            <SafeAreaView>
             <Header />
             <View style={styles.wrapAllContent}>
                 <View style={styles.wrapTitle}>
@@ -49,19 +27,11 @@ const HomeScreen: React.FC<HomeScreenType> = ({
                     </View>
                     <Dropdown type="icon" classDropdown={styles.dropdown} />
                 </View>
-                <TabMenu data={fakeData} styleTabmenu={styles.tabmenu} onpress={handleChangeTab} contentTabmenu={styles.contentTabMenu} styleAcitive={styles.tabActive} value={valueTabMenu} />
-                <SafeAreaView>
-                    <FlatList
-                    data={data}
-                    horizontal={true}
-                    renderItem={({item})=>{
-                        return <Products items={item}/>
-                    }}
-                    >
-                    </FlatList>
-                </SafeAreaView>
+                    <BlockListProdHome />
+                    <BlockPopularHome/>
             </View>
         </SafeAreaView>
+        </ScrollView>
     )
 }
 const styles = StyleSheet.create({
@@ -120,24 +90,5 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 15,
         borderBottomRightRadius:30
     },
-    tabmenu: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        marginTop:25
-    },
-    contentTabMenu: {
-        fontFamily: "SF Pro Text",
-        fontStyle: "normal",
-        fontSize: 14,
-        lineHeight: 18,
-        fontWeight: "600",
-        color:"#000000"
-    },
-    tabActive: {
-        color: "#967259",
-        fontWeight:"700"
-    },
-  
 })
 export default HomeScreen

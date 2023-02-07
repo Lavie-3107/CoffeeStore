@@ -5,10 +5,12 @@ import Iconn from 'react-native-vector-icons/AntDesign'
 import {styles} from "./styles"
 const Products: React.FC<TypeProducts> = ({
     items,
-    onpress
+    onpress,
+    height,
+    width
 }) => {
     return (
-       <SafeAreaView style={ styles.wrapProducts}>
+       <SafeAreaView style={[{height:height,width:width},[styles.wrapProducts]]}>
                     <Image source={{ uri: `${items.url}` }}
                         style={styles.imgProducts} />
                      <View style={ styles.wrapVote}>

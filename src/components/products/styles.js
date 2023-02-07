@@ -2,13 +2,14 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     wrapProducts: {
+        flex: 1,
         backgroundColor: "#ffffff",
         elevation: 2,
         borderRadius: 25,
         paddingHorizontal: 10,
         paddingTop: 11,
         paddingBottom: 8,
-        position: "relative"
+        position: "relative",
     },
     imgProducts: {
         height: 123,
