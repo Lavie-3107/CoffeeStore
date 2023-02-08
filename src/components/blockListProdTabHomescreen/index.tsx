@@ -1,11 +1,11 @@
-import { TypeBlockListProHome } from "./interface"
+import { TypeBlockListTabProHome } from "./interface"
 import {Text,View,SafeAreaView,FlatList,Dimensions} from "react-native"
 import TabMenu from "../tabMenu/tabMenu"
 import { data } from "../../../screen/home/fakeData"
 import {useState} from 'react'
 import Products from "../products/products"
 import { styles } from "./styles"
-const BlockListProdHome: React.FC<TypeBlockListProHome> = ({
+const BlockListProdTabHome: React.FC<TypeBlockListTabProHome> = ({
     
 }) => {
       const fakeData = [
@@ -50,4 +50,4 @@ const BlockListProdHome: React.FC<TypeBlockListProHome> = ({
         </SafeAreaView>
     )
 }
-export default BlockListProdHome
+export default BlockListProdTabHome
