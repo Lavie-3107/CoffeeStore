@@ -1,4 +1,4 @@
-import { Image, SafeAreaView, Text, View } from "react-native"
+import { Image, SafeAreaView, Text, TouchableOpacity, View } from "react-native"
 import Button from "../button/button"
 import { TypeProducts } from "./interface"
 import Iconn from 'react-native-vector-icons/AntDesign'
@@ -7,12 +7,15 @@ const Products: React.FC<TypeProducts> = ({
     items,
     onpress,
     height,
-    width
+    width,
+    navigation
 }) => {
     return (
        <SafeAreaView style={[{height:height,width:width},[styles.wrapProducts]]}>
-                    <Image source={{ uri: `${items.url}` }}
+            <TouchableOpacity onPress={()=>navigation.navigate("ProductDetail")}>
+                 <Image source={{ uri: `${items.url}` }}
                         style={styles.imgProducts} />
+                   </TouchableOpacity>
                      <View style={ styles.wrapVote}>
                         <View style={styles.bgdVoteBlur}></View>
                         <View style={styles.wrapContentVote}>
@@ -21,12 +24,12 @@ const Products: React.FC<TypeProducts> = ({
                         </View>
                               </View>
                     <View style={styles.wrapContentProducts}>
-                        <View style={styles.wrapName}>
+                <TouchableOpacity style={styles.wrapName} onPress={() => navigation.navigate("ProductDetail")}>
                             <View style={styles.wrapNameProducts}>
                                 <Text style={styles.nameProducts}>{items.name}</Text>
                                  <Text style={styles.descriptionProducts}>{items.subname}</Text>
                             </View>
-                        </View>
+                        </TouchableOpacity>
                         <View style={styles.priceandButton}>
                             <View style={styles.wrapPriceProducts}>
                                 <Text style={ styles.dolar}>$</Text>

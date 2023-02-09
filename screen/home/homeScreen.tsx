@@ -8,10 +8,12 @@ import Dropdown from "../../src/components/dropdown/dropDown"
 import BlockListProdTabHome from "../../src/components/blockListProdTabHomescreen"
 import BlockListProHome from "../../src/components/blockListProHomesreen"
 import {styles} from "./styles"
+import { TouchableHighlight } from "react-native"
 const HomeScreen: React.FC<HomeScreenType> = ({
-    
+        navigation
 }) => {
     const [valueInput, setValueInput] = useState<string>("")
+    
     return (
         <ScrollView>
             <SafeAreaView>
@@ -28,12 +30,12 @@ const HomeScreen: React.FC<HomeScreenType> = ({
                     </View>
                     <Dropdown type="icon" classDropdown={styles.dropdown} />
                 </View>
-                    <BlockListProdTabHome />
-                    <BlockListProHome title="Popular Now"/>
-                    <BlockListProHome title="Sale Now"/>
-                    <BlockListProHome title="Best Seller"/>
+                    <BlockListProdTabHome navigation={navigation } />
+                    <BlockListProHome title="Popular Now" navigation={navigation }/>
+                    <BlockListProHome title="Sale Now" navigation={navigation }/>
+                    <BlockListProHome title="Best Seller" navigation={navigation }/>
             </View>
-        </SafeAreaView>
+            </SafeAreaView>
         </ScrollView>
     )
 }

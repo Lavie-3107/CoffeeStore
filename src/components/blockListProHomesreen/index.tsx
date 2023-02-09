@@ -7,7 +7,8 @@ import Products from "../products/products"
 import { styles } from "./styles"
 const BlockListProHome: React.FC<TypeBlockListProHome> = ({
    title,
-   listItems
+    listItems,
+   navigation
 }) => {
     let dimensions = Dimensions.get("window");
     let imageWidth = Math.round((dimensions.width) / 2 - 29);
@@ -16,10 +17,10 @@ const BlockListProHome: React.FC<TypeBlockListProHome> = ({
             <Text style={styles.title}>{title}</Text>
                 <SafeAreaView style={{marginTop:20,width:"100%"}}>
                 <FlatList
-                    contentContainerStyle={{ flexDirection: "row", flexWrap: "wrap",gap:10 }}
+                    contentContainerStyle={{ flexDirection: "row",gap:10 }}
                     data={data}
                     renderItem={({item})=>{
-                        return <Products width={imageWidth}  items={item}/>
+                        return <Products width={imageWidth} items={item} navigation={ navigation} />
                     }}
                     >
                     </FlatList>

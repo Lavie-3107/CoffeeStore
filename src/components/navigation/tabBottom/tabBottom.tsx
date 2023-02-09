@@ -5,22 +5,24 @@ import Cart from '../../../../screen/cart/cart';
 import WishList from "../../../../screen/wishList/wishList"
 import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Entypo'
+import StackNavigation from '../stackNavigation/stackNavigation';
 export default function TabBottom() {
   const Tab = createBottomTabNavigator();
   return (
    <NavigationContainer>
      <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="StackNavigation"
       screenOptions={{
         tabBarShowLabel:false,
         headerShown:false,
         tabBarInactiveTintColor:"#967259",
-        tabBarActiveTintColor:"#8FBC8F",
+        tabBarActiveTintColor: "#8FBC8F",
+        tabBarHideOnKeyboard:true
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={HomeScreen}
+        name="StackNavigation"
+        component={StackNavigation}
         options={{
         tabBarIcon: ({ color, size }) => (
             <Icon name="home" color={color} size={size} />

@@ -1,4 +1,5 @@
 export type TypeBlockListProHome = {
     title:string,
-    listItems?:any
+    listItems?: any,
+    navigation:any
 }

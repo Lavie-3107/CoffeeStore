@@ -6,7 +6,7 @@ import {useState} from 'react'
 import Products from "../products/products"
 import { styles } from "./styles"
 const BlockListProdTabHome: React.FC<TypeBlockListTabProHome> = ({
-    
+    navigation
 }) => {
       const fakeData = [
         {
@@ -42,7 +42,7 @@ const BlockListProdTabHome: React.FC<TypeBlockListTabProHome> = ({
                     data={data}
                     horizontal={true}
                     renderItem={({item})=>{
-                        return <Products  width={imageWidth} items={item}/>
+                        return <Products navigation={navigation}  width={imageWidth} items={item}/>
                     }}
                     >
                     </FlatList>
