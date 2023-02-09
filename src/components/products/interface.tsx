@@ -3,5 +3,6 @@ export type TypeProducts = {
     onpress?: any,
     height?: any,
     width?: any,
-    navigation?:any
+    navigation?: any,
+    handleRedirectProDetail:any
 }

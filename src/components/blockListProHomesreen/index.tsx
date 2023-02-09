@@ -5,6 +5,8 @@ import { data } from "../../../screen/home/fakeData"
 import {useState} from 'react'
 import Products from "../products/products"
 import { styles } from "./styles"
+import { useDispatch,useSelector } from "react-redux"
+import { pushDataProductsDetail } from "../../../redux/productsDetail/productsDetailSlice"
 const BlockListProHome: React.FC<TypeBlockListProHome> = ({
    title,
     listItems,
@@ -12,6 +14,12 @@ const BlockListProHome: React.FC<TypeBlockListProHome> = ({
 }) => {
     let dimensions = Dimensions.get("window");
     let imageWidth = Math.round((dimensions.width) / 2 - 29);
+    const dispatch = useDispatch()
+    const handleRedirectProDetaill = () => {
+        console.log(1)
+        // dispatch(pushDataProductsDetail(items))
+        // navigation.navigate("ProductDetail")
+    }
     return (
         <SafeAreaView style={{marginTop:20,paddingBottom:20}}>
             <Text style={styles.title}>{title}</Text>
@@ -20,7 +28,7 @@ const BlockListProHome: React.FC<TypeBlockListProHome> = ({
                     contentContainerStyle={{ flexDirection: "row",gap:10 }}
                     data={data}
                     renderItem={({item})=>{
-                        return <Products width={imageWidth} items={item} navigation={ navigation} />
+                        return <Products width={imageWidth} items={item} navigation={ navigation} handleRedirectProDetail={handleRedirectProDetaill} />
                     }}
                     >
                     </FlatList>

@@ -10,6 +10,7 @@ import Quantity from "../../src/components/quantity/quantity"
 import PriceProduct from '../../src/components/priceProduct/index';
 import {styles} from "./styles"
 import { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 const ProductDetail:React.FC<TypeProductDetail>=({
 
 })=>{
@@ -41,7 +42,9 @@ const ProductDetail:React.FC<TypeProductDetail>=({
   const [chooseIngredien,setchooseIngredien]=useState<number>(0)
   const [size,setSize]=useState<string>("")
   const [quantity,setQuantity]=useState<number>(1)
-  const [price,setPrice]=useState()
+  const [price, setPrice] = useState()
+  const dataProductsDetail=useSelector((state:any)=>state.ProductsDetail.productsDetailSlice)
+  console.log("🚀 ~ file: productDetail.tsx:47 ~ dataProductsDetail", dataProductsDetail)
   const handlePlusQuantity=()=>{
    setQuantity(quantity+1)
   }
