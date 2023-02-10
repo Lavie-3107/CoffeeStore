@@ -39,16 +39,16 @@ const BlockListProdTabHome: React.FC<TypeBlockListTabProHome> = ({
         dispatch(pushDataProductsDetail(items))
         navigation.navigate("ProductDetail")
     }
-    const [listData,setListData]=useState(null)
+    const [listData,setListData]=useState<object[]>([])
     useEffect(()=>{
       if(valueTabMenu === 1){
-        setListData(data.filter((el:object)=>el.category === "FREEZE"))
+        setListData(data.filter((el:any)=>el.category === "FREEZE"))
       }else if (valueTabMenu === 2){
-        setListData(data.filter((el:object)=>el.category === "COFFEE"))
+        setListData(data.filter((el:any)=>el.category === "COFFEE"))
       }else if(valueTabMenu === 3){
-        setListData(data.filter((el:object)=>el.category === "TEA"))
+        setListData(data.filter((el:any)=>el.category === "TEA"))
       }else if (valueTabMenu === 4){
-        setListData(data.filter((el:object)=>el.category === "CAKE"))
+        setListData(data.filter((el:any)=>el.category === "CAKE"))
       }
     },[valueTabMenu])
     return (

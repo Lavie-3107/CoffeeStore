@@ -16,7 +16,7 @@ const BlockListProHome: React.FC<TypeBlockListProHome> = ({
     let dimensions = Dimensions.get("window");
     let imageWidth = Math.round((dimensions.width) / 2 - 29);
     const dispatch = useDispatch()
-    const[listData,setListData]=useState(null)
+    const[listData,setListData]=useState<object[]>([])
     const handleRedirectProDetaill = (items:any) => {
       dispatch(pushDataProductsDetail(items))
       navigation.navigate("ProductDetail")
