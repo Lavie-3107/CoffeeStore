@@ -11,10 +11,9 @@ const Products: React.FC<TypeProducts> = ({
     navigation,
     handleRedirectProDetail
 }) => {
-    console.log("🚀 ~ file: products.tsx:14 ~ handleRedirectProDetail", handleRedirectProDetail)
     return (
        <SafeAreaView style={[{height:height,width:width},[styles.wrapProducts]]}>
-            <TouchableOpacity onPress={()=>handleRedirectProDetail()}>
+            <TouchableOpacity onPress={()=>handleRedirectProDetail(items)}>
                  <Image source={{ uri: `${items.url}` }}
                         style={styles.imgProducts} />
                    </TouchableOpacity>
@@ -26,7 +25,7 @@ const Products: React.FC<TypeProducts> = ({
                         </View>
                               </View>
                     <View style={styles.wrapContentProducts}>
-                <TouchableOpacity style={styles.wrapName} onPress={()=>handleRedirectProDetail()}>
+                <TouchableOpacity style={styles.wrapName} onPress={()=>handleRedirectProDetail(items)}>
                             <View style={styles.wrapNameProducts}>
                                 <Text style={styles.nameProducts}>{items.name}</Text>
                                  <Text style={styles.descriptionProducts}>{items.subname}</Text>
