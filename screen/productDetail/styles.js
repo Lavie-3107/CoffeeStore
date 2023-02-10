@@ -20,6 +20,7 @@ export const styles=StyleSheet.create({
     fontSize: 16,
     lineHeight: 18,
     color:"#000000",
+    textTransform:"lowercase"
   },
   textIngredient:{
     fontFamily: "SF Pro Text",

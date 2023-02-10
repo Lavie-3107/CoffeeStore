@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
-    productsDetailSlice: []
+    productsDetailSlice: null
 }
 
 export const productsDetailSlice = createSlice({
@@ -8,7 +8,7 @@ export const productsDetailSlice = createSlice({
     initialState,
     reducers: {
         pushDataProductsDetail: (state, action) => {
-            state.productsDetailSlice.push(action.payload)
+            state.productsDetailSlice=action.payload
         },
     },
 })

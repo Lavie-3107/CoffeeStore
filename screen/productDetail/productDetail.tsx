@@ -9,22 +9,37 @@ import ChoosenSize from "../../src/components/choosenSize"
 import Quantity from "../../src/components/quantity/quantity"
 import PriceProduct from '../../src/components/priceProduct/index';
 import {styles} from "./styles"
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useEffect, useMemo, useState } from "react"
+import { useSelector,useDispatch } from "react-redux"
+import { handleWishListSlice } from "../../redux/wishList/wishListSlice"
 const ProductDetail:React.FC<TypeProductDetail>=({
 
 })=>{
-  const chooseIngredient=[
+  const datachooseIce=[
     {
-      name:"White Chocolate",
+      name:"70% Ice",
       value:1
     },
     {
-      name:"Milk Chocolate",
+      name:"50% Ice",
       value:2
     },
     {
-      name:"Dark Chocolate",
+      name:"30% Ice",
+      value:3
+    }
+  ]
+  const datachooseSugar=[
+    {
+      name:"70% Sugar",
+      value:1
+    },
+    {
+      name:"50% Sugar",
+      value:2
+    },
+    {
+      name:"30% Sugar",
       value:3
     }
   ]
@@ -39,12 +54,21 @@ const ProductDetail:React.FC<TypeProductDetail>=({
       name:"L"
     },
   ]
-  const [chooseIngredien,setchooseIngredien]=useState<number>(0)
+  const [chooseIce,setchooseIce]=useState<number>(0)
+  const [chooseSugar,setchooseSugar]=useState<number>(0)
   const [size,setSize]=useState<string>("")
   const [quantity,setQuantity]=useState<number>(1)
   const [price, setPrice] = useState()
+  const dispatch=useDispatch()
   const dataProductsDetail=useSelector((state:any)=>state.ProductsDetail.productsDetailSlice)
-  console.log("🚀 ~ file: productDetail.tsx:47 ~ dataProductsDetail", dataProductsDetail)
+  const dataWishList=useSelector((state:any)=>state.WishList.wishList)
+  const wishlist=useMemo(()=>{
+     if(dataWishList.includes(dataProductsDetail)){
+      return true
+     }else{
+      return false
+     }
+  },[dataWishList])
   const handlePlusQuantity=()=>{
    setQuantity(quantity+1)
   }
@@ -54,8 +78,19 @@ const ProductDetail:React.FC<TypeProductDetail>=({
   const handleChooseSize=(name:string)=>{
     setSize(name)
   }
-  const handlechoosenIngredient=(value:number)=>{
-    setchooseIngredien(value)
+  const handlechoosenIce=(value:number)=>{
+    setchooseIce(value)
+  }
+  const handlechoosenSugar=(value:number)=>{
+    setchooseSugar(value)
+  }
+  const sumPrice=useMemo(()=>{
+    let sum=0
+    sum=quantity * dataProductsDetail.price
+    return sum as any
+   },[quantity])
+  const handleWishList =()=>{
+    dispatch(handleWishListSlice(dataProductsDetail))
   }
   // useEffect(()=>{
   //   setPrice()
@@ -64,44 +99,53 @@ const ProductDetail:React.FC<TypeProductDetail>=({
     <SafeAreaView>
       <ScrollView>
       <View style={{paddingHorizontal:15,paddingTop:13}}>
-        <Image source={{uri:"https://vcdn1-dulich.vnecdn.net/2021/09/10/caphe-3391-1631291456.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=hBCk64sCNamz5Ha8DDig0Q"}} style={{height:411,width:"100%",resizeMode:"cover",borderRadius:40}}/>
+        <Image source={{uri:dataProductsDetail.url}} style={{height:411,width:"100%",resizeMode:"cover",borderRadius:40}}/>
         <View style={styles.wrapinfoProduct}>
           <View>
           </View>
           <View style={{zIndex:5,paddingVertical:25}}>
             <View style={{flexDirection:"row",justifyContent:"space-between"}}>
               <View>
-                <Text style={styles.textName}>Espresso</Text>
+                <Text style={styles.textName}>{dataProductsDetail.name}</Text>
                 <View style={{flexDirection:"row",gap:20,alignItems:"center"}}>
-                <Text style={styles.textSubname}>with chocolate</Text>
+                <Text style={styles.textSubname}>{dataProductsDetail.subname}</Text>
                 <View style={{flexDirection:"row",gap:5}}>
                <Iconn name="star" color="#D17842" size={16} />
-                <Text style={ styles.numberStar}>4.6</Text>
+                <Text style={ styles.numberStar}>{dataProductsDetail.vote}</Text>
             </View>
                 </View>
               </View>
-                <WishList/>
+                <WishList handleWishList={handleWishList} wishList={wishlist}/>
             </View>
-            <View style={{flexDirection:"row",alignItems:"center",gap:10}}>
-              <Text style={styles.textIngredient}>Ingredient:</Text>
-                 <Ingredient title="Coffee"/>
-              </View>
               <Text style={styles.descriptionPro}>
-              A single espresso shot poured into hot foamy milk, with the surface topped with mildly sweetened cocoa powder and drizzled with scrumptious caramel syrup
+              {dataProductsDetail.description}
               </Text>
-              <View style={{marginTop:25}}>
-                <Text style={styles.textChoice}>Choice of Chocolate</Text>
+            {dataProductsDetail.category !== "CAKE" && <>
+            <View style={{marginTop:25}}>
+                <Text style={styles.textChoice}>Choice of Ice</Text>
                <FlatList
                contentContainerStyle={{gap:10,marginTop:15}}
                showsHorizontalScrollIndicator={false}
-                data={chooseIngredient}
+                data={datachooseIce}
                 horizontal={true} 
                 renderItem={({item})=>{
-                return <ChoosenIngredient name={item.name} value={item.value} choosenIngredient={chooseIngredien} handlechoosenIngredient={handlechoosenIngredient}/>
+                return <ChoosenIngredient name={item.name} value={item.value} choosenIngredient={chooseIce} handlechoosenIngredient={handlechoosenIce}/>
                }}/>
               </View>
+              <View style={{marginTop:25}}>
+                <Text style={styles.textChoice}>Choice of Sugar</Text>
+               <FlatList
+               contentContainerStyle={{gap:10,marginTop:15}}
+               showsHorizontalScrollIndicator={false}
+                data={datachooseSugar}
+                horizontal={true} 
+                renderItem={({item})=>{
+                return <ChoosenIngredient name={item.name} value={item.value} choosenIngredient={chooseSugar} handlechoosenIngredient={handlechoosenSugar}/>
+               }}/>
+              </View>
+            </>}
               <View style={{flexDirection:"row",justifyContent:"space-between"}}>
-                <View style={{marginTop:25}}>
+               {dataProductsDetail.category !== "CAKE" &&  <View style={{marginTop:25}}>
                   <Text style={styles.textChoice}>Size</Text>
                   <FlatList
                     contentContainerStyle={{gap:10,marginTop:15}}
@@ -111,14 +155,14 @@ const ProductDetail:React.FC<TypeProductDetail>=({
                       renderItem={({item})=>{
                       return <ChoosenSize name={item.name} handleChooseSize={handleChooseSize} chooseSize={size}/>
                }}/>
-                </View>
+                </View>}
                 <View style={{marginTop:25}}>
                   <Text style={styles.textQuantity}>Quantity</Text>
                    <Quantity quantity={quantity} handlePlus={handlePlusQuantity} handleMinus={handleMinusQuantity}/>
                 </View>
               </View>
               <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center",marginTop:25}}>
-                <PriceProduct price={4.56}/>
+                <PriceProduct price={sumPrice}/>
                 <Button classesButton={styles.btnBuyNow} classLable={styles.lablebtnBuyNow} title="Add to cart"/>
               </View>
           </View>

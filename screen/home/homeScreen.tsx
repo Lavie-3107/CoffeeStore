@@ -2,18 +2,16 @@ import { SafeAreaView,StyleSheet,Text,View,Image, ScrollView, FlatList } from "r
 import { HomeScreenType } from "./interface"
 import Header from "../../src/components/header/index"
 import Input from "../../src/components/input/input"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Icon from 'react-native-vector-icons/FontAwesome'
 import Dropdown from "../../src/components/dropdown/dropDown"
 import BlockListProdTabHome from "../../src/components/blockListProdTabHomescreen"
 import BlockListProHome from "../../src/components/blockListProHomesreen"
 import {styles} from "./styles"
-import { TouchableHighlight } from "react-native"
 const HomeScreen: React.FC<HomeScreenType> = ({
         navigation
 }) => {
     const [valueInput, setValueInput] = useState<string>("")
-    
     return (
         <ScrollView>
             <SafeAreaView>

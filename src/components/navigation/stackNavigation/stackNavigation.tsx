@@ -9,7 +9,9 @@ const StackNavigation = () => {
             <Stack.Screen name="Home" component={HomeScreen} options={{
                 headerShown:false
             }} />
-            <Stack.Screen name="ProductDetail" component={ProductDetail} />
+            <Stack.Screen name="ProductDetail" component={ProductDetail} options={{
+                headerTitle:""
+            }} />
         </Stack.Navigator>
     )
 }

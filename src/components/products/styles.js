@@ -15,7 +15,7 @@ export const styles = StyleSheet.create({
         height: 123,
         width: "100%",
         borderRadius: 25,
-        resizeMode: "stretch",
+        resizeMode: "contain",
     },
     wrapContentProducts: {
 

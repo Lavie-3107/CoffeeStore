@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native"
 
 type Interface={
-  price:number
+  price:any
 }
 const PriceProduct:React.FC<Interface>=({
  price
@@ -11,7 +11,7 @@ const PriceProduct:React.FC<Interface>=({
     <Text style={styles.textChoice}>Price</Text>
     <View style={{flexDirection:"row",gap:5,marginTop:5}}>
     <Text style={{color:"#967259",fontSize:16,lineHeight:18}}>$</Text>
-    <Text style={styles.textChoice}>4.25</Text>
+    <Text style={styles.textChoice}>{price}</Text>
     </View>
     </SafeAreaView>
   )

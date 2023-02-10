@@ -8,7 +8,6 @@ const Products: React.FC<TypeProducts> = ({
     onpress,
     height,
     width,
-    navigation,
     handleRedirectProDetail
 }) => {
     return (

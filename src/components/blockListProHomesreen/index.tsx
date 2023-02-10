@@ -7,6 +7,7 @@ import Products from "../products/products"
 import { styles } from "./styles"
 import { useDispatch,useSelector } from "react-redux"
 import { pushDataProductsDetail } from "../../../redux/productsDetail/productsDetailSlice"
+import { useEffect } from 'react';
 const BlockListProHome: React.FC<TypeBlockListProHome> = ({
    title,
     listItems,
@@ -15,18 +16,27 @@ const BlockListProHome: React.FC<TypeBlockListProHome> = ({
     let dimensions = Dimensions.get("window");
     let imageWidth = Math.round((dimensions.width) / 2 - 29);
     const dispatch = useDispatch()
-    const handleRedirectProDetaill = () => {
-        console.log(1)
-        // dispatch(pushDataProductsDetail(items))
-        // navigation.navigate("ProductDetail")
+    const[listData,setListData]=useState(null)
+    const handleRedirectProDetaill = (items:any) => {
+      dispatch(pushDataProductsDetail(items))
+      navigation.navigate("ProductDetail")
     }
+    useEffect(()=>{
+      if(title === "Popular Now"){
+        setListData(data.filter((el:any)=>el.popular === true))
+      }else if(title === "Sale Now"){
+        setListData(data.filter((el:any)=>el.sale === true))
+      }else if(title === "Best Seller"){
+        setListData(data.filter((el:any)=>el.bestSeller === true))
+      }
+    },[])
     return (
         <SafeAreaView style={{marginTop:20,paddingBottom:20}}>
             <Text style={styles.title}>{title}</Text>
                 <SafeAreaView style={{marginTop:20,width:"100%"}}>
                 <FlatList
                     contentContainerStyle={{ flexDirection: "row",gap:10 }}
-                    data={data}
+                    data={listData}
                     renderItem={({item})=>{
                         return <Products width={imageWidth} items={item} navigation={ navigation} handleRedirectProDetail={handleRedirectProDetaill} />
                     }}

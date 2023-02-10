@@ -7,16 +7,18 @@ export const wishListSlice = createSlice({
     name: 'wishList',
     initialState,
     reducers: {
-        addToWishList: (state, action) => {
-            state.wishList = state.wishList.push(action.payload)
-        },
-        removeFromWishList: (state, action) => {
-
+        handleWishListSlice: (state, action) => {
+            if(state.wishList.includes(action.payload)){
+               const index=state.wishList.findIndex(action.payload)
+               state.wishList.splice(index,1)
+            }else{
+                state.wishList.push(action.payload)
+            }
         },
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addToWishList, removeFromWishList } = wishListSlice.actions
+export const { handleWishListSlice } = wishListSlice.actions
 
 export default wishListSlice.reducer
