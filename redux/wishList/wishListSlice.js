@@ -8,8 +8,8 @@ export const wishListSlice = createSlice({
     initialState,
     reducers: {
         handleWishListSlice: (state, action) => {
-            if (state.wishList.includes(action.payload)) {
-                const index = state.wishList.findIndex(action.payload)
+            const index = state.wishList.findIndex((el) => el.id === action.payload.id)
+            if (index >= 0) {
                 state.wishList.splice(index, 1)
             } else {
                 state.wishList.push(action.payload)

@@ -8,7 +8,7 @@ export const productsDetailSlice = createSlice({
     initialState,
     reducers: {
         pushDataProductsDetail: (state, action) => {
-            state.productsDetailSlice=action.payload
+            state.productsDetailSlice = action.payload
         },
     },
 })

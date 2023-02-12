@@ -62,7 +62,6 @@ const ProductDetail:React.FC<TypeProductDetail>=({
   const dispatch=useDispatch()
   const dataProductsDetail=useSelector((state:any)=>state.ProductsDetail.productsDetailSlice)
   const dataWishList=useSelector((state:any)=>state.WishList.wishList)
-  console.log("🚀 ~ file: productDetail.tsx:65 ~ dataWishList", dataWishList)
   const wishlist=useMemo(()=>{
      if(dataWishList.includes(dataProductsDetail)){
       return true
