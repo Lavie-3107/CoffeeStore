@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { pushDataProductsDetail } from "../../redux/productsDetail/productsDetailSlice";
 import Modal from "../../src/components/modal/modal";
 import Icon from 'react-native-vector-icons/AntDesign'
+import {handleRemoveMulti} from "../../redux/wishList/wishListSlice"
  const WishList:React.FC<WishListType>=({
   navigation
  })=>{
@@ -35,6 +36,11 @@ import Icon from 'react-native-vector-icons/AntDesign'
         setShowModal(true)
       }
    }
+   const handleRemoveWishlist = () => {
+     dispatch(handleRemoveMulti(choiseProduct))
+     setShowModal(false)
+     setChoiseProduct([])
+   }
    const renderProductsWishlist = useMemo(() => {
      if(dataWishlist.length > 0){
      return(
@@ -61,14 +67,14 @@ import Icon from 'react-native-vector-icons/AntDesign'
         </TouchableOpacity>
       ),
     });
-  }, [navigation]);
+  }, [navigation,choiseProduct]);
   return (
     <SafeAreaView style={styles.wrapWishlistScreen}>
       <Text style={styles.textSumItem}>Item({dataWishlist.length})</Text>
       <ScrollView>
       {renderProductsWishlist}
       </ScrollView>
-      {showModal && <Modal title="Bạn có chắc muốn xóa sản phẩm chứ" description="Những sản phẩm mà bạn tích chọn sẽ được xóa" handelCancel={()=>setShowModal(false)}/>}
+      {showModal && <Modal title="Bạn có chắc muốn xóa sản phẩm chứ" description="Những sản phẩm mà bạn tích chọn sẽ được xóa" handelCancel={()=>setShowModal(false)} handelOk={handleRemoveWishlist}/>}
       {showModalNoti && <Modal title="Tích chọn vào sản phẩm" description="Chưa có sản phẩm nào được tích chọn vui lòng tích chọn sản phẩm" handelOk={()=>setShowModalNoti(false)} type="modalNoti"/>}
   </SafeAreaView>
   )
