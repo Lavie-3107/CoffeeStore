@@ -128,8 +128,8 @@ const ProductDetail:React.FC<TypeProductDetail>=({
                showsHorizontalScrollIndicator={false}
                 data={datachooseIce}
                 horizontal={true} 
-                renderItem={({item})=>{
-                return <ChoosenIngredient name={item.name} value={item.value} choosenIngredient={chooseIce} handlechoosenIngredient={handlechoosenIce}/>
+                renderItem={({item,index})=>{
+                return <ChoosenIngredient key={index} name={item.name} value={item.value} choosenIngredient={chooseIce} handlechoosenIngredient={handlechoosenIce}/>
                }}/>
               </View>
               <View style={{marginTop:25}}>
@@ -139,8 +139,8 @@ const ProductDetail:React.FC<TypeProductDetail>=({
                showsHorizontalScrollIndicator={false}
                 data={datachooseSugar}
                 horizontal={true} 
-                renderItem={({item})=>{
-                return <ChoosenIngredient name={item.name} value={item.value} choosenIngredient={chooseSugar} handlechoosenIngredient={handlechoosenSugar}/>
+                renderItem={({item,index})=>{
+                return <ChoosenIngredient key={index} name={item.name} value={item.value} choosenIngredient={chooseSugar} handlechoosenIngredient={handlechoosenSugar}/>
                }}/>
               </View>
             </>}
@@ -152,8 +152,8 @@ const ProductDetail:React.FC<TypeProductDetail>=({
                     showsHorizontalScrollIndicator={false}
                       data={chooseSize}
                       horizontal={true} 
-                      renderItem={({item})=>{
-                      return <ChoosenSize name={item.name} handleChooseSize={handleChooseSize} chooseSize={size}/>
+                      renderItem={({item,index})=>{
+                      return <ChoosenSize key={index} name={item.name} handleChooseSize={handleChooseSize} chooseSize={size}/>
                }}/>
                 </View>}
                 <View style={{marginTop:25}}>

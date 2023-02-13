@@ -37,8 +37,8 @@ const BlockListProHome: React.FC<TypeBlockListProHome> = ({
                 <FlatList
                     contentContainerStyle={{ flexDirection: "row",gap:10 }}
                     data={listData}
-                    renderItem={({item})=>{
-                        return <Products width={imageWidth} items={item} navigation={ navigation} handleRedirectProDetail={handleRedirectProDetaill} />
+                    renderItem={({item,index})=>{
+                        return <Products key={index} width={imageWidth} items={item} navigation={ navigation} handleRedirectProDetail={handleRedirectProDetaill} />
                     }}
                     >
                     </FlatList>

@@ -30,7 +30,7 @@ const styles=StyleSheet.create({
     position:"absolute",
     top:0,
     flexDirection:"column",
-    justifyContent:"center"
+    justifyContent:"center",
   },
   opacity:{
     height:"100%",

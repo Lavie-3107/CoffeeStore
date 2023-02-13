@@ -33,7 +33,7 @@ const Products: React.FC<TypeProducts> = ({
                         <View style={styles.priceandButton}>
                             <View style={styles.wrapPriceProducts}>
                                 <Text style={ styles.dolar}>$</Text>
-                                <Text style={styles.numberPrice}>4.20</Text>
+                                <Text style={styles.numberPrice}>{items.price}</Text>
                             </View>
                         </View>
                     </View>
