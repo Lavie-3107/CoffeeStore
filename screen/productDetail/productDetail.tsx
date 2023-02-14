@@ -12,6 +12,7 @@ import {styles} from "./styles"
 import { useEffect, useMemo, useState } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { handleWishListSlice } from "../../redux/wishList/wishListSlice"
+import { addToCart } from "../../redux/cart/cartSlice"
 const ProductDetail:React.FC<TypeProductDetail>=({
 
 })=>{
@@ -89,8 +90,16 @@ const ProductDetail:React.FC<TypeProductDetail>=({
     sum=quantity * dataProductsDetail.price
     return sum as any
    },[quantity])
-  const handleWishList =()=>{
+  const handleWishList = () =>{
     dispatch(handleWishListSlice(dataProductsDetail))
+  }
+  const handleAddtoCart = () =>{
+    dispatch(addToCart({
+    ...dataProductsDetail,quantity,
+    chooseIce,
+    chooseSugar,
+    size
+    }))
   }
   // useEffect(()=>{
   //   setPrice()
@@ -163,7 +172,7 @@ const ProductDetail:React.FC<TypeProductDetail>=({
               </View>
               <View style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center",marginTop:25}}>
                 <PriceProduct price={sumPrice}/>
-                <Button classesButton={styles.btnBuyNow} classLable={styles.lablebtnBuyNow} title="Add to cart"/>
+                <Button classesButton={styles.btnBuyNow} classLable={styles.lablebtnBuyNow} title="Add to cart" onpress={handleAddtoCart}/>
               </View>
           </View>
         </View>

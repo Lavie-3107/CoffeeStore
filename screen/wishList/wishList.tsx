@@ -1,5 +1,5 @@
 import { WishListType } from "./interface"
-import { SafeAreaView,Text,View,TouchableHighlight, ScrollView, StyleSheet, Image, TouchableOpacity, FlatList} from "react-native"
+import { SafeAreaView,Text,View,TouchableHighlight, ScrollView, StyleSheet, Image, TouchableOpacity, FlatList, Dimensions} from "react-native"
 import { useEffect, useState } from 'react';
 import ProductsWishlist from "../../src/components/productWishlist";
 import { useSelector,useDispatch } from "react-redux";
@@ -11,6 +11,7 @@ import {handleRemoveMulti} from "../../redux/wishList/wishListSlice"
  const WishList:React.FC<WishListType>=({
   navigation
  })=>{
+  let ScreenHeight = Dimensions.get("window").height - 160;
    const dispatch=useDispatch()
    const dataWishlist=useSelector((state:any)=>state.WishList.wishList)
    const [choiseProduct,setChoiseProduct]=useState<any>([])
@@ -54,7 +55,9 @@ import {handleRemoveMulti} from "../../redux/wishList/wishListSlice"
       </FlatList>
      )
      }else{
-      return null
+      return  <SafeAreaView style={{height:ScreenHeight,flexDirection:"column",justifyContent:"center",alignItems:"center",paddingHorizontal:20,alignSelf:"center"}}>
+                <Text style={{textAlign:"center",fontWeight:"700",fontSize:20,lineHeight:26}}>Chưa có sản phẩm nào trong danh sách yêu thích vui lòng thêm sản phẩm yêu thích</Text>
+              </SafeAreaView>
      }
    },[dataWishlist,choiseProduct])
    useEffect(() => {

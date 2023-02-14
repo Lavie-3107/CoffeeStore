@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Entypo'
 import StackNavigation from '../stackNavigation/HomeNavigation/stackNavigation';
 import WishlistNavigation from '../stackNavigation/wishlistNavigation/wishlistNavigation';
+import CartNavigation from '../stackNavigation/cartNavigation/cartNavigation';
 export default function TabBottom() {
   const Tab = createBottomTabNavigator();
   return (
@@ -41,7 +42,7 @@ export default function TabBottom() {
       />
       <Tab.Screen
         name="Cart"
-        component={Cart}
+        component={CartNavigation}
         options={{
           tabBarIcon: ({ color, size }) => (
             <Icon name="shopping-cart" color={color} size={size} />
