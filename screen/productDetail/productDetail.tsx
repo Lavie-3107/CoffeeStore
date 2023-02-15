@@ -100,6 +100,11 @@ const ProductDetail:React.FC<TypeProductDetail>=({
     chooseSugar,
     size
     }))
+    // setSize("")
+    // setQuantity(1)
+    // setchooseSugar(0)
+    // setchooseIce(0)
+    
   }
   // useEffect(()=>{
   //   setPrice()

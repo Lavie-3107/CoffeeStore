@@ -29,11 +29,14 @@ export const cartSlice = createSlice({
               el.quantity -= 1
           }
           })
+        },
+        removeProductOnCart:(state,action)=>{
+         
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addToCart,plusQuantity,minusQuantity} = cartSlice.actions
+export const { addToCart,plusQuantity,minusQuantity,removeProductOnCart} = cartSlice.actions
 
 export default cartSlice.reducer
