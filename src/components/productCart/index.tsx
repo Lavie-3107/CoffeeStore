@@ -5,7 +5,7 @@ import {styles} from "./styles"
 import { renderIce,renderSugar } from "../../../screen/cart/functionHelper/functionHelper";
 import Quantity from "../quantity/quantity";
 import {useEffect, useState} from "react"
-import { plusQuantity } from "../../../redux/cart/cartSlice";
+import { minusQuantity, plusQuantity } from "../../../redux/cart/cartSlice";
 import { useDispatch } from "react-redux";
 const ProductsCart:React.FC<ProductsWishlistType>=({
    items,
@@ -13,10 +13,9 @@ const ProductsCart:React.FC<ProductsWishlistType>=({
    chekbox,
    handleRedirectProDetail
 })=>{
-  const [quantity,setQuantity]=useState<number>(items.quantity)
   const dispatch = useDispatch()
   const handleMinusQuantity=()=>{
-    dispatch(plusQuantity(items))
+    dispatch(minusQuantity(items))
   }
   const handlePlusQuantity=()=>{
     dispatch(plusQuantity(items))
@@ -38,13 +37,13 @@ const ProductsCart:React.FC<ProductsWishlistType>=({
               </TouchableOpacity>
             </View>
             <View style={{flexDirection:"row",gap:5,marginBottom:5}}>
-              {items.size && <Text>Size {items.size} ,</Text>}
-              {items.chooseIce && <Text>Ice {renderIce(items.chooseIce)} ,</Text>}
-              {items.chooseSugar && <Text>Sugar {renderSugar(items.chooseSugar)} </Text>}
+              <Text>{items.size !== "" && <Text>Size {items.size} ,</Text>}</Text>
+              <Text>{items.chooseIce !== 0 && <Text>Ice {renderIce(items.chooseIce)} ,</Text>}</Text>
+              <Text>{items.chooseSugar !==0 && <Text>Sugar {renderSugar(items.chooseSugar)} </Text>}</Text>
             </View>
             <View>
-            <Text style={styles.priceProduct}>US ${items.price}</Text>
-            <Quantity quantity={quantity} handleMinus={handleMinusQuantity} handlePlus={handlePlusQuantity}/>
+            <Text style={styles.priceProduct}>US ${items.price * items.quantity}</Text>
+            <Quantity quantity={items.quantity} handleMinus={handleMinusQuantity} handlePlus={handlePlusQuantity}/>
             </View>
            </View>
         </SafeAreaView>

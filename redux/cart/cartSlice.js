@@ -8,20 +8,32 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-          state.cart.push(action.payload)
+          const index = state.cart.findIndex(el=>el.id === action.payload.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&el.size === action.payload.size)
+          if(index < 0){
+             state.cart.push(action.payload)
+          }else{
+            state.cart[index].quantity += action.payload.quantity
+          }
+          
         },
         plusQuantity:(state,action)=>{
           state.cart.forEach(el=>{
-            if(el == action.payload){
-                console.log(1);
-                el.quantity = el.quantity + 1
-            }
+            if(el.id === action.payload.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&el.size === action.payload.size){
+              el.quantity += 1
+          }
+          })
+        },
+        minusQuantity:(state,action)=>{
+          state.cart.forEach(el=>{
+            if(el.id === action.payload.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&el.size === action.payload.size){
+              el.quantity -= 1
+          }
           })
         }
     },
 })
 
 // Action creators are generated for each case reducer function
-export const { addToCart,plusQuantity} = cartSlice.actions
+export const { addToCart,plusQuantity,minusQuantity} = cartSlice.actions
 
 export default cartSlice.reducer
