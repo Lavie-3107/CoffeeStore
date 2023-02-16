@@ -8,7 +8,7 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-          const index = state.cart.findIndex(el=>el.id === action.payload.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&el.size === action.payload.size)
+          const index = state.cart.findIndex(el=>el.items.id === action.payload.items.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&el.size === action.payload.size)
           if(index < 0){
              state.cart.push(action.payload)
           }else{
@@ -18,20 +18,23 @@ export const cartSlice = createSlice({
         },
         plusQuantity:(state,action)=>{
           state.cart.forEach(el=>{
-            if(el.id === action.payload.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&el.size === action.payload.size){
+            if(el.items.id === action.payload.items.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&&el.size === action.payload.size){
               el.quantity += 1
           }
           })
         },
         minusQuantity:(state,action)=>{
           state.cart.forEach(el=>{
-            if(el.id === action.payload.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&el.size === action.payload.size){
+            if(el.items.id === action.payload.items.id&&el.chooseIce === action.payload.chooseIce&&el.chooseSugar === action.payload.chooseSugar&&el.size === action.payload.size){
               el.quantity -= 1
           }
           })
         },
         removeProductOnCart:(state,action)=>{
-         
+         action.payload.forEach(element=>{
+          const index=state.cart.findIndex((el)=>el.items.id === element.items.id&&el.chooseIce === element.chooseIce&&el.chooseSugar === element.chooseSugar&&el.size === element.size)
+          state.cart.splice(index,1)
+         })
         }
     },
 })

@@ -95,10 +95,11 @@ const ProductDetail:React.FC<TypeProductDetail>=({
   }
   const handleAddtoCart = () =>{
     dispatch(addToCart({
-    ...dataProductsDetail,quantity,
+    items:dataProductsDetail,
+    size,
     chooseIce,
     chooseSugar,
-    size
+    quantity
     }))
     // setSize("")
     // setQuantity(1)
