@@ -1,4 +1,5 @@
 export type WishListType={
   wishList?:boolean,
-  handleWishList?:any
+  handleAddWishList?:any,
+  handleRemoveWishList?:any
 }

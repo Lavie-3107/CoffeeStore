@@ -55,6 +55,7 @@ const ProductDetail:React.FC<TypeProductDetail>=({
       name:"L"
     },
   ]
+  
   const [chooseIce,setchooseIce]=useState<number>(0)
   const [chooseSugar,setchooseSugar]=useState<number>(0)
   const [size,setSize]=useState<string>("")
@@ -90,7 +91,10 @@ const ProductDetail:React.FC<TypeProductDetail>=({
     sum=quantity * dataProductsDetail.price
     return sum as any
    },[quantity])
-  const handleWishList = () =>{
+  const handleAddWishList = () =>{
+    dispatch(handleWishListSlice(dataProductsDetail))
+  }
+  const handleRemoveWishList = () =>{
     dispatch(handleWishListSlice(dataProductsDetail))
   }
   const handleAddtoCart = () =>{
@@ -101,10 +105,10 @@ const ProductDetail:React.FC<TypeProductDetail>=({
     chooseSugar,
     quantity
     }))
-    // setSize("")
-    // setQuantity(1)
-    // setchooseSugar(0)
-    // setchooseIce(0)
+    setSize("")
+    setQuantity(1)
+    setchooseSugar(0)
+    setchooseIce(0)
     
   }
   // useEffect(()=>{
@@ -130,7 +134,7 @@ const ProductDetail:React.FC<TypeProductDetail>=({
             </View>
                 </View>
               </View>
-                <WishList handleWishList={handleWishList} wishList={wishlist}/>
+                <WishList handleAddWishList={handleAddWishList} handleRemoveWishList={handleRemoveWishList} wishList={wishlist}/>
             </View>
               <Text style={styles.descriptionPro}>
               {dataProductsDetail.description}

@@ -1,5 +1,5 @@
 import { CartType } from "./interface"
-import { SafeAreaView,ScrollView,StyleSheet,Text,TouchableOpacity,View
+import { Dimensions, SafeAreaView,ScrollView,StyleSheet,Text,TouchableOpacity,View
  } from "react-native"
 import { useSelector,useDispatch } from "react-redux"
 import ProductsCart from "../../src/components/productCart"
@@ -11,10 +11,9 @@ import { pushDataProductsDetail } from "../../redux/productsDetail/productsDetai
  const Cart:React.FC<CartType>=({
  navigation
  })=>{
+  let ScreenHeight = Dimensions.get("window").height - 160;
   const dataCart=useSelector((state:any)=>state.Cart.cart)
-  console.log("🚀 ~ file: cart.tsx:15 ~ dataCart", dataCart)
   const [choiseProduct,setChoiseProduct]=useState<any>([])
-  console.log("🚀 ~ file: cart.tsx:16 ~ choiseProduct", choiseProduct)
   const [showModal,setShowModal]=useState<boolean>(false)
   const [showModalNoti,setShowModalNoti]=useState<boolean>(false)
   const dispatch = useDispatch()
@@ -42,12 +41,9 @@ const handleRedirectProDetaill = (items:any) => {
   navigation.navigate("ProductDetail")
 }
 const handleCheckbox=(items:any)=>{
-  console.log(items);
-  console.log(choiseProduct);
-  
-  const index = choiseProduct.findIndex((el:any)=>el.items.id === items.items.id && el.size === items.size && el.chooseIce === items.chooseIce && el.chooseSugar === items.chooseSugar) 
-    if(index >= 0){
-      setChoiseProduct(choiseProduct.splice(index,1))
+  const findItems = choiseProduct.find((el:any)=>el.items.id === items.items.id && el.size === items.size && el.chooseIce === items.chooseIce && el.chooseSugar === items.chooseSugar) 
+    if(findItems !== undefined){
+      setChoiseProduct(choiseProduct.filter((el:any)=>el !== findItems))
     }else{
       const newchoiseProduct=[...choiseProduct,items]
       setChoiseProduct(newchoiseProduct)
@@ -73,13 +69,14 @@ const handleCheckbox=(items:any)=>{
     <Text style={styles.price}>${calculateTotal}</Text>
     </View>
      </SafeAreaView>
-      <ScrollView>
+     {dataCart.length === 0 ? <SafeAreaView style={{paddingHorizontal:20,height:ScreenHeight,flexDirection:"column",justifyContent:"center",alignItems:"center"}}><Text style={styles.dataNull}>Hiện giỏ hàng đang trống vui lòng thêm sản phẩm vào giỏ hàng</Text></SafeAreaView> :  
+     <ScrollView>
     <SafeAreaView style={{flexDirection:"column",gap:10,marginTop:10,paddingBottom:50,paddingHorizontal:20}}>
     {dataCart.map((el:any,index:number)=>
     <ProductsCart chekbox={choiseProduct} items={el} key={index} handleRedirectProDetail={handleRedirectProDetaill} handleCheckbox={handleCheckbox}/>  
     )}
     </SafeAreaView>
-    </ScrollView>
+    </ScrollView>}
     {showModal && <Modal title="Bạn có chắc muốn xóa sản phẩm chứ" description="Những sản phẩm mà bạn tích chọn sẽ được xóa" handelCancel={()=>setShowModal(false)} handelOk={handleRemoveCart}/>}
       {showModalNoti && <Modal title="Tích chọn vào sản phẩm" description="Chưa có sản phẩm nào được tích chọn vui lòng tích chọn sản phẩm" handelOk={()=>setShowModalNoti(false)} type="modalNoti"/>}
     </SafeAreaView>
@@ -99,6 +96,11 @@ const handleCheckbox=(items:any)=>{
   price:{
     fontSize:20,
     fontWeight:"600"
+  },
+  dataNull:{
+    textAlign:"center",
+    fontSize:20,
+    fontWeight:"700"
   }
  })
  export default Cart
