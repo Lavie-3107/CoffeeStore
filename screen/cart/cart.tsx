@@ -61,7 +61,7 @@ const handleCheckbox=(items:any)=>{
     });
   }, [navigation,choiseProduct]);
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{minHeight:"100%"}}>
      <SafeAreaView style={{flexDirection:"row",justifyContent:"space-between",alignItems:"center"}}>
      <Text style={styles.sumProduct}>Item : {dataCart.length}</Text>
       <View style={{flexDirection:"row",alignItems:"center",alignSelf:"flex-end",paddingHorizontal:20}}>

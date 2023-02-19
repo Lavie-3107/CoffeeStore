@@ -13,6 +13,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { handleWishListSlice } from "../../redux/wishList/wishListSlice"
 import { addToCart } from "../../redux/cart/cartSlice"
+import Modal from "../../src/components/modal/modal"
 const ProductDetail:React.FC<TypeProductDetail>=({
 
 })=>{
@@ -63,7 +64,10 @@ const ProductDetail:React.FC<TypeProductDetail>=({
   const [price, setPrice] = useState()
   const dispatch=useDispatch()
   const dataProductsDetail=useSelector((state:any)=>state.ProductsDetail.productsDetailSlice)
-  const dataWishList=useSelector((state:any)=>state.WishList.wishList)
+  const dataWishList = useSelector((state: any) => state.WishList.wishList)
+  const [showModaladdWl, setShowModaladdWl] = useState(false)
+  const [showModalremoveWl, setShowModalremoveWl] = useState(false)
+  const [showModalAddtoCart,setShowModalAddtoCart]=useState(false)
   const wishlist=useMemo(()=>{
      if(dataWishList.includes(dataProductsDetail)){
       return true
@@ -93,9 +97,11 @@ const ProductDetail:React.FC<TypeProductDetail>=({
    },[quantity])
   const handleAddWishList = () =>{
     dispatch(handleWishListSlice(dataProductsDetail))
+    setShowModaladdWl(true)
   }
   const handleRemoveWishList = () =>{
     dispatch(handleWishListSlice(dataProductsDetail))
+    setShowModalremoveWl(true)
   }
   const handleAddtoCart = () =>{
     dispatch(addToCart({
@@ -109,6 +115,7 @@ const ProductDetail:React.FC<TypeProductDetail>=({
     setQuantity(1)
     setchooseSugar(0)
     setchooseIce(0)
+    setShowModalAddtoCart(true)
     
   }
   // useEffect(()=>{
@@ -188,6 +195,9 @@ const ProductDetail:React.FC<TypeProductDetail>=({
         </View>
       </View>
       </ScrollView>
+      {showModaladdWl && <Modal title="Thông báo" description="Bạn đã thêm sản phẩm vào danh sách yêu thích thành công" handelOk={() => setShowModaladdWl(false)} type="modalNoti" />}
+      {showModalremoveWl && <Modal title="Thông báo" description="Bạn đã xóa sản phẩm khỏi danh sách yêu thích thành công" handelOk={() => setShowModalremoveWl(false)} type="modalNoti" />}
+      {showModalAddtoCart && <Modal title="Thông báo" description="Bạn đã thêm sản phẩm vào giỏ hàng thành công" handelOk={()=>setShowModalAddtoCart(false)} type="modalNoti"/>}
     </SafeAreaView>
   )
 }
